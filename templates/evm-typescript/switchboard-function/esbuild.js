@@ -29,16 +29,6 @@ build({
   entryPoints: ["./src/index.ts"],
   outfile: "dist/index.js",
 })
-  .then(({ metafile }) => {
-    if (metafile && !isCI) {
-      // analyze bundle size at https://esbuild.github.io/analyze/
-      fs.writeFileSync(
-        "dist/meta.json",
-        JSON.stringify(metafile, null, 2),
-        "utf-8"
-      );
-    }
-  })
   .then(() => {
-    execSync(`./node_modules/typescript/bin/tsc -d`, { encoding: "utf-8" });
+    execSync(`npx tsc -d`, { encoding: "utf-8" });
   });

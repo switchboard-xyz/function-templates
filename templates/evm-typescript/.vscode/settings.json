@@ -1,3 +1,0 @@
-{
-  "rust-analyzer.files.excludeDirs": ["rust/bindings"]
-}

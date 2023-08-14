@@ -28,7 +28,7 @@ fs.mounts = [
   { uri = "file:{{ arch_libdir }}", path = "{{ arch_libdir }}" },
   { uri = "file:/usr", path = "/usr" },
   { uri = "file:/lib64", path = "/lib64" },
-  { uri = "file:/root/app/dist/index.js", path = "/root/app/dist/index.js" },
+  { uri = "file:/sgx/app/index.js", path = "/sgx/app/index.js" },
   { uri = "file:/usr/lib/ssl/certs", path = "/usr/lib/ssl/certs" },
   { uri = "file:/home/credentials", path = "/home/credentials" },
   # Key options:
@@ -65,7 +65,7 @@ sgx.trusted_files = [
   "file:/usr{{ arch_libdir }}/",
   "file:/lib64/",
   "file:/usr/include/",
-  "file:/root/app/dist/index.js",
+  "file:/sgx/app/index.js",
   "file:/usr/bin/node",
   "file:/usr/lib/ssl/certs/",
   "file:/data/protected_files/",
@@ -86,4 +86,4 @@ sgx.allowed_files = [
 
 # sgx.file_check_policy = "allow_all_but_log"
 
-loader.argv = ["/usr/bin/node", "--unhandled-rejections=warn", "/root/app/dist/index.js"]
+loader.argv = ["/usr/bin/node", "--unhandled-rejections=warn", "/sgx/app/index.js"]

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM switchboardlabs/sgx-function:main AS builder
+FROM switchboardlabs/sgx-function AS builder
 
 ARG CARGO_NAME=switchboard-function-evm
 ENV CARGO_NAME=$CARGO_NAME
@@ -14,20 +14,21 @@ COPY ./src ./src
 RUN rustup update
 
 RUN rustup override set stable
-RUN --mount=type=cache,target=/usr/local/cargo/registry,id=${TARGETPLATFORM} --mount=type=cache,target=target,id=${TARGETPLATFORM} \
+RUN --mount=type=cache,target=/usr/local/cargo/registry,id=${TARGETPLATFORM} \
+    --mount=type=cache,target=target,id=${TARGETPLATFORM} \
     cargo build --release && \
     cargo strip && \
-    mv target/release/randomness-function /sgx/app
+    mv target/release/${CARGO_NAME} /sgx/app
 
-FROM switchboardlabs/sgx-function:main
+FROM switchboardlabs/sgx-function
 
 # Copy the binary
 WORKDIR /sgx
 COPY --from=builder /sgx/app /sgx
-COPY ./config/app.manifest.template /sgx/app.manifest.template
-
 
 # Get the measurement from the enclave
-RUN /get_measurement.sh
+RUN rm -f /measurement.txt && \
+    /get_measurement.sh && \
+    cat /measurement.txt
 
 ENTRYPOINT ["bash", "/boot.sh"]
