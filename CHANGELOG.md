@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/switchboard-xyz/function-templates/compare/v1.0.4...v1.0.5) (2023-08-14)
+
+
+### Bug Fixes
+
+* gha uses bash script ([eb19fe8](https://github.com/switchboard-xyz/function-templates/commit/eb19fe87ff6a0217ee5e8e8d9d8b380266899b9f))
+
 ## [1.0.4](https://github.com/switchboard-xyz/function-templates/compare/v1.0.3...v1.0.4) (2023-08-14)
 
 
