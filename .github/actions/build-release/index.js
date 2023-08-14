@@ -33,10 +33,10 @@ async function run() {
       url: uploadUrl,
       // Setup headers for API call, see Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset for more information
       headers: {
-        "content-type": "application/tgz",
+        "content-type": "application/zip",
         "content-length": fs.statSync(outputZipFile).size,
       },
-      name: template,
+      name: `${template}.zip`,
       file: fs.readFileSync(outputZipFile),
     });
 
