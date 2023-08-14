@@ -1,0 +1,17 @@
+{
+  "extends": "@switchboard-xyz",
+  "root": true,
+  "rules": {
+    "quotes": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-control-regex": "off",
+    "node/no-unpublished-require": [
+      "error"
+    ]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+    "allowImportExportEverywhere": true
+  }
+}
