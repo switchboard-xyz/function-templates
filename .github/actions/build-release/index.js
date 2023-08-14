@@ -29,7 +29,7 @@ async function run() {
 
     await zip.zip(inputDirectory, outputZipFile);
 
-    const uploadAssetResponse = await octokit.repos.uploadReleaseAsset({
+    const uploadAssetResponse = await octokit.rest.repos.uploadReleaseAsset({
       url: uploadUrl,
       // Setup headers for API call, see Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-upload-release-asset for more information
       headers: {
