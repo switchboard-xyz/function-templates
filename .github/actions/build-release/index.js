@@ -42,7 +42,7 @@ async function run() {
 
   const templates = fs
     .readdirSync("./templates", { encoding: "utf-8" })
-    .filter((f) => fs.statSync(f).isDirectory());
+    .filter((f) => fs.statSync(`./templates/${f}`).isDirectory());
   console.log(`Templates: \n\t - ${templates.join("\n\t - ")}`);
 
   fs.mkdirSync(".artifacts");
