@@ -1,0 +1,15 @@
+name: "Build Release"
+description: "Build a release for a set of templates"
+inputs:
+  tag-name:
+    description: "The release tag name"
+    required: true
+  upload-url:
+    description: "The release upload URL"
+    required: true
+outputs:
+  artifacts:
+    description: "Array of artifacts that were generated"
+runs:
+  using: "node16"
+  main: "index.js"

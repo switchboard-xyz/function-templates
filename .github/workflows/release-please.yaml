@@ -1,0 +1,55 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          command: manifest
+          release-type: node
+          token: ${{secrets.GITHUB_TOKEN}}
+          default-branch: main
+          monorepo-tags: false
+
+      - name: Checkout Repository
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        if: ${{ steps.release.outputs.releases_created }}
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.releases_created }}
+        run: pnpm install
+
+      - name: Create Release Artifacts
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: "./.github/actions/build-release"
+        with:
+          tag-name: ${{ steps.release.outputs.tag_name }}
+          upload-url: ${{ steps.release.outputs.upload_url }}
+          templates: |
+            solana
+            solana-anchor
+            evm-rust
+            evm-typescript
