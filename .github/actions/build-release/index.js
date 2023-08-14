@@ -30,7 +30,9 @@ async function buildRelease(template, uploadUrl) {
 }
 
 async function run() {
-  const github = new GitHub(core.getInput("gh-token", { required: true }));
+  // const github = new github.GitHub(
+  //   core.getInput("gh-token", { required: true })
+  // );
 
   const tagName = core.getInput("tag-name", { required: true });
   console.log(`TagName: ${tagName}`);
