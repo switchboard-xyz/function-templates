@@ -34,7 +34,7 @@ jobs:
                 dirname="${d%/}"
                 # Zip the directory into an archive
                 zip -r "${dirname}.zip" "${dirname}"
-                gh release upload  ${{ steps.release.outputs.upload_url }} "${dirname}.zip" --token=${{ secrets.GITHUB_TOKEN }}
+                gh release upload ${{ steps.release.outputs.upload_url }} "${dirname}".zip
             fi
           done
 
