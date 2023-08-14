@@ -24,10 +24,12 @@ async function run() {
 
   const artifacts = [];
   for await (const template of templates) {
-    const inputDirectory = `./templates/${template}`;
+    const inputDirectory = `./templates/${template}/`;
     const outputZipFile = `./.artifacts/${template}.zip`;
 
-    await zip.zip(inputDirectory, outputZipFile);
+    await zip.zip(inputDirectory, outputZipFile, {
+      compression: zip.COMPRESSION_LEVEL.medium,
+    });
 
     const uploadAssetResponse = await octokit.rest.repos.uploadReleaseAsset({
       url: uploadUrl,
