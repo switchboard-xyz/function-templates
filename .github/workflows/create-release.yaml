@@ -33,6 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tag_name: ${{ github.event.inputs.tag }}
           release_name: Function Templates ${{ github.event.inputs.tag }}
           draft: false
           prerelease: false
