@@ -3,7 +3,6 @@ const github = require("@actions/github");
 const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
-// const zip = require("zip-a-folder");
 
 async function run() {
   const octokit = github.getOctokit(
@@ -23,7 +22,7 @@ async function run() {
 
   fs.mkdirSync(".artifacts");
 
-  const workingDir = process.c;
+  const workingDir = process.cwd();
 
   const artifacts = [];
   for await (const template of templates) {
