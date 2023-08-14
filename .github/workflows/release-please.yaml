@@ -17,6 +17,7 @@ jobs:
         id: release
         with:
           release-type: node
+          command: manifest
           package-name: "@switchboard-xyz/function-templates"
           changelog-path: "CHANGELOG.md"
           bump-minor-pre-major: true
