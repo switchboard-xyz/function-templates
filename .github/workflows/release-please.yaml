@@ -48,8 +48,8 @@ jobs:
         with:
           tag-name: ${{ steps.release.outputs.tag_name }}
           upload-url: ${{ steps.release.outputs.upload_url }}
-          templates:
-            - solana
-            - solana-anchor
-            - evm-rust
-            - evm-typescript
+          templates: |
+            solana
+            solana-anchor
+            evm-rust
+            evm-typescript
