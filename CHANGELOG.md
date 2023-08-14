@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/switchboard-xyz/function-templates/compare/v1.2.0...v1.3.0) (2023-08-14)
+
+
+### Features
+
+* updated evm templates ([babe018](https://github.com/switchboard-xyz/function-templates/commit/babe018174883967bba15ccf537232627cb17188))
+
 ## [1.2.0](https://github.com/switchboard-xyz/function-templates/compare/v1.1.0...v1.2.0) (2023-08-14)
 
 
