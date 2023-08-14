@@ -1,6 +1,6 @@
-use anchor_lang::prelude::*;
+use switchboard_solana::prelude::*;
 
-declare_id!("BrHEnBouwW1WggMnVZEbT2iGsNQMWk9u6ZVRcUyiXPXu");
+declare_id!("2fLRc1XeKpz8X74JLfTk6LegRdC3T6Zjt2a7WtMGxokW");
 
 #[program]
 pub mod switchboard_client {

@@ -1,16 +1,11 @@
 <div align="center">
-  <img src="https://github.com/switchboard-xyz/sbv2-core/raw/main/website/static/img/icons/switchboard/avatar.png" />
 
-  <h1>Switchboard<br>Solana Functions Template</h1>
+![Switchboard Logo](https://github.com/switchboard-xyz/sbv2-core/raw/main/website/static/img/icons/switchboard/avatar.png)
 
-  <p>
-    <a href="https://discord.gg/switchboardxyz">
-      <img alt="Discord" src="https://img.shields.io/discord/841525135311634443?color=blueviolet&logo=discord&logoColor=white" />
-    </a>
-    <a href="https://twitter.com/switchboardxyz">
-      <img alt="Twitter" src="https://img.shields.io/twitter/follow/switchboardxyz?label=Follow+Switchboard" />
-    </a>
-  </p>
+# Switchboard: Solana Functions Template
+
+> Getting started with Switchboard Functions on Solana
+
 </div>
 
 ## Switchboard Functions

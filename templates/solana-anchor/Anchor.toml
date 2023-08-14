@@ -1,18 +1,19 @@
 [workspace]
-members = ["program"]
+members = ["."]
 
 [features]
 seeds = false
 skip-lint = false
 [programs.localnet]
-switchboard_client = "BrHEnBouwW1WggMnVZEbT2iGsNQMWk9u6ZVRcUyiXPXu"
+switchboard_client = "2fLRc1XeKpz8X74JLfTk6LegRdC3T6Zjt2a7WtMGxokW"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
 cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+wallet = "/Users/gally/.config/solana/id.json"
+
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
