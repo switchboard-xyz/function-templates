@@ -11,7 +11,12 @@
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
       "prerelease": false,
-      "extra-files": ["templates/*/**", "README.md", "CHANGELOG.md"]
+      "extra-files": [
+        "./templates",
+        "./templates/*/**",
+        "./README.md",
+        "./CHANGELOG.md"
+      ]
     }
   }
 }
