@@ -47,13 +47,18 @@ jobs:
         run: pnpm install
 
       - name: Create Release Artifacts
-        if: ${{ steps.release.outputs.releases_created }}
         uses: "./.github/actions/build-release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag-name: ${{ steps.release.outputs.tag_name }}
-          upload-url: ${{ steps.release.outputs.upload_url }}
-          templates: |
-            solana
-            solana-anchor
-            evm-rust
-            evm-typescript
+          tag-name: ${{ steps.create-release.outputs.id }}
+          upload-url: ${{ steps.create-release.outputs.upload_url }}
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rollback Release
+        if: failure() && steps.create-release.outputs.id != ''
+        uses: author/action-rollback@stable
+        with:
+          release_id: ${{ steps.create-release.outputs.id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

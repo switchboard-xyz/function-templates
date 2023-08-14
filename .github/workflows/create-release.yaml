@@ -48,3 +48,11 @@ jobs:
           tag-name: ${{ steps.create-release.outputs.id }}
           upload-url: ${{ steps.create-release.outputs.upload_url }}
           gh-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rollback Release
+        if: failure() && steps.create-release.outputs.id != ''
+        uses: author/action-rollback@stable
+        with:
+          release_id: ${{ steps.create-release.outputs.id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
