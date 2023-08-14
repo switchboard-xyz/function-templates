@@ -1,8 +1,8 @@
-import core from "@actions/core";
-import github from "@actions/github";
-import fs from "fs";
-import path from "path";
-import zip from "zip-a-folder";
+const core = require("@actions/core");
+const github = require("@actions/github");
+const fs = require("fs");
+const path = require("path");
+const zip = require("zip-a-folder");
 
 async function run() {
   const octokit = github.getOctokit(
