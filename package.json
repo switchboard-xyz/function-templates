@@ -2,7 +2,9 @@
   "name": "@switchboard-xyz/function-templates",
   "private": true,
   "version": "1.0.0",
+  "main": "index.js",
   "files": [
+    "index.js",
     "templates",
     "CHANGELOG.md",
     "README.md",
