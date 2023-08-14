@@ -34,7 +34,7 @@ jobs:
                 dirname="${d%/}"
                 template_name=$(basename "${dirname}")
                 zip -r "${template_name}.zip" "${dirname}"
-                gh release upload ${{ steps.release.outputs.upload_url }} "${template_name}.zip"
+                gh release upload ${{ steps.release.outputs.tag_name }} "${template_name}.zip"
             fi
           done
 
