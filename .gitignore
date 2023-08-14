@@ -1,0 +1,36 @@
+.artifacts
+# Javascript
+**/node_modules
+dist
+lib
+build
+tsconfig.tsbuildinfo
+.turbo
+yarn.lock
+package-lock.json
+
+*.env
+.switchboard
+
+# Python
+__pycache__
+.pytest_cache
+
+# Rust
+**/target
+**/target/**
+.crates
+
+# Misc
+.keypairs
+*-keypair*.json
+.archive
+*-error.log
+*-debug.log
+.DS_Store
+
+# Solana
+.anchor
+
+# Aptos
+.aptos
