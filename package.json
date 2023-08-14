@@ -2,6 +2,12 @@
   "name": "@switchboard-xyz/function-templates",
   "private": true,
   "version": "1.0.0",
+  "files": [
+    "templates",
+    "CHANGELOG.md",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "build:release": "tsx ./scripts/build-release.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
