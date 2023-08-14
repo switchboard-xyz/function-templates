@@ -14,5 +14,11 @@ outputs:
   artifacts:
     description: "Array of artifacts that were generated"
 runs:
-  using: "node16"
-  main: "index.js"
+  using: composite
+  steps:
+    - id: get-git-version
+      shell: bash
+      run: |
+        for d in */; do
+
+        done
