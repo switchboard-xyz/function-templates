@@ -16,11 +16,14 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          command: manifest
           release-type: node
+          package-name: "@switchboard-xyz/function-templates"
+          changelog-path: "CHANGELOG.md"
+          bump-minor-pre-major: true
+          bump-patch-for-minor-pre-major: true
+          draft: false
+          prerelease: false
           token: ${{secrets.GITHUB_TOKEN}}
-          default-branch: main
-          monorepo-tags: true
 
       - name: Checkout Repository
         if: ${{ steps.release.outputs.releases_created }}
