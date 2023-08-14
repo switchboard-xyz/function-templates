@@ -1,23 +1,20 @@
 # syntax=docker/dockerfile:1.4
 FROM switchboardlabs/sgx-function AS builder
 
-# Setup PNPM
-RUN npm i -g pnpm
-
-# Setup Application
+# Setup Dependencies
 WORKDIR /app
 COPY package.json ./package.json
-RUN pnpm install
+RUN npm install
+
+# Build Function
 COPY esbuild.js tsconfig.json ./
 COPY ./src ./src
-RUN pnpm build
+RUN npm run build:function
 
 FROM switchboardlabs/sgx-function
 
 ARG SWITCHBOARD_RECEIVER_ADDRESS
 ENV SWITCHBOARD_RECEIVER_ADDRESS=$SWITCHBOARD_RECEIVER_ADDRESS
-
-RUN mkdir -p /sgx/app
 
 # Copy the compiled JS file
 COPY --from=builder /app/dist/index.js /sgx/nodejs/index.js

@@ -29,7 +29,7 @@
     "coverage": "npx hardhat coverage",
     "compile": "npx hardhat compile",
     "build:contracts": "forge build --root . -C contracts/src --optimize --out forge-artifacts",
-    "build:function": "cd switchboard-function && node .esbuild.js",
+    "build:function": "node ./esbuild.js",
     "build": "npm run build:contracts && npm run build:function",
     "size": "npx hardhat size-contracts",
     "xdeploy": "npx hardhat xdeploy",
@@ -160,6 +160,5 @@
     "xdeployer": "^1.2.5",
     "yaml": "^2.1.1",
     "zksync-web3": "^0.14.3"
-  },
-
+  }
 }

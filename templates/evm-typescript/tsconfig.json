@@ -1,8 +1,10 @@
 {
-  "include": ["./src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "src",
     "module": "commonjs",
     "target": "es2022",
     "noEmit": true,

@@ -46,15 +46,6 @@
       "./node_modules/@commitlint/config-conventional"
     ]
   },
-  "lint-staged": {
-    "**/*.{js,ts,jsx,tsx}": [
-      "eslint --fix",
-      "prettier --write -u"
-    ],
-    "*/*.{css,less,scss,html,json,md,toml,yaml,yml}": [
-      "prettier --write -u"
-    ]
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/@commitlint/cz-commitlint"
