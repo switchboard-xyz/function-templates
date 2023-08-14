@@ -1,0 +1,50 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        type: string
+        required: true
+        description: The release tag
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: GitHub Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: Function Templates ${{ github.event.inputs.tag }}
+          draft: false
+          prerelease: false
+          body: "**Switchboard Function Templates**"
+
+      - name: Create Release Artifacts
+        uses: "./.github/actions/build-release"
+        with:
+          tag-name: ${{ steps.create-release.outputs.id }}
+          upload-url: ${{ steps.create-release.outputs.upload_url }}
+          templates: |
+            solana
+            solana-anchor
+            evm-rust
+            evm-typescript
