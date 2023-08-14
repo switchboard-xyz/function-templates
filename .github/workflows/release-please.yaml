@@ -29,14 +29,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd "./templates" || exit 2
-          for d in */; do
+          for d in ./templates/*; do
             if [[ -d "${d}" ]]; then
-                # Remove the trailing slash to get the directory name
                 dirname="${d%/}"
-                # Zip the directory into an archive
-                zip -r "${dirname}.zip" "${dirname}"
-                gh release upload ${{ steps.release.outputs.upload_url }} "${dirname}".zip
+                template_name=$(basename "${dirname}")
+                zip -r "${template_name}.zip" "${dirname}"
+                gh release upload ${{ steps.release.outputs.upload_url }} ${dirname}.zip
             fi
           done
 
