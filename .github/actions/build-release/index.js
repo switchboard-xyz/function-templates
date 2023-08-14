@@ -1,8 +1,9 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const child_process = require("child_process");
 const fs = require("fs");
 const path = require("path");
-const zip = require("zip-a-folder");
+// const zip = require("zip-a-folder");
 
 async function run() {
   const octokit = github.getOctokit(
@@ -22,13 +23,16 @@ async function run() {
 
   fs.mkdirSync(".artifacts");
 
+  const workingDir = process.c;
+
   const artifacts = [];
   for await (const template of templates) {
     const inputDirectory = `./templates/${template}/`;
-    const outputZipFile = `./.artifacts/${template}.zip`;
+    const outputZipFile = path.join(workingDir, `./.artifacts/${template}.zip`);
 
-    await zip.zip(inputDirectory, outputZipFile, {
-      compression: zip.COMPRESSION_LEVEL.medium,
+    const result = child_process.execSync(`zip -r ${outputZipFile} .`, {
+      cwd: inputDirectory,
+      encoding: "utf-8",
     });
 
     const uploadAssetResponse = await octokit.rest.repos.uploadReleaseAsset({
