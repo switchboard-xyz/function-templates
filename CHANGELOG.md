@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/switchboard-xyz/function-templates/compare/v1.0.8...v1.0.9) (2023-08-14)
+
+
+### Bug Fixes
+
+* gha ([3d38713](https://github.com/switchboard-xyz/function-templates/commit/3d387133e3e05305f74f5461fa786b6d4d922a1a))
+
 ## [1.0.8](https://github.com/switchboard-xyz/function-templates/compare/v1.0.7...v1.0.8) (2023-08-14)
 
 
