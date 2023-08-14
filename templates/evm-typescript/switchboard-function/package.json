@@ -1,0 +1,41 @@
+{
+  "name": "switchboard-function-ts",
+  "description": "Switchboard function in ts",
+  "version": "0.0.1",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src",
+    "contracts",
+    "package.json"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "node ./esbuild.js",
+    "test": "node dist/"
+  },
+  "dependencies": {
+    "@switchboard-xyz/evm.js": "3.12.14",
+    "chalk": "^5.0.1",
+    "esbuild": "^0.19.0",
+    "ethers": "^5.7.2",
+    "js-sha3": "^0.8.0",
+    "node-fetch": "^2.1.6",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.1.6",
+    "@types/bn.js": "^5.1.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.6.4",
+    "@types/node-fetch": "^2.6.2",
+    "mocha": "^10.1.0",
+    "ts-mocha": "^10.0.0",
+    "yaml": "^2.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "rust-lang.rust-analyzer",
+    "nomicfoundation.hardhat-solidity"
+  ]
+}

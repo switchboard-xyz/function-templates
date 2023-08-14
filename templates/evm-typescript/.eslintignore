@@ -1,0 +1,16 @@
+node_modules
+lib
+cache
+cache-zk
+artifacts
+artifacts-zk
+typechain-types
+coverage
+deployments
+forge-artifacts
+bin
+out
+bindings
+abis
+.github
+*.*

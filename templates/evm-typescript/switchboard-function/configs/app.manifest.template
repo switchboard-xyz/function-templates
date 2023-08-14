@@ -1,0 +1,89 @@
+
+{% set arch_libdir = "/lib/x86_64-linux-gnu" %}
+{% set log_level = "error" %}
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "/usr/bin/node"
+
+loader.log_level = "{{ log_level }}"
+
+loader.env.LD_LIBRARY_PATH = "/lib:{{ arch_libdir }}:/usr/lib:/usr/{{ arch_libdir }}"
+loader.env.PATH = "/bin:/usr/bin"
+
+loader.env.RPC_URL = { passthrough = true }
+loader.env.PAYER = { passthrough = true }
+loader.env.FUNCTION_KEY = { passthrough = true }
+loader.env.FUNCTION_DATA = { passthrough = true }
+loader.env.FUNCTION_REQUEST_KEY = { passthrough = true }
+loader.env.FUNCTION_REQUEST_DATA = { passthrough = true }
+loader.env.VERIFIER = { passthrough = true }
+loader.env.REWARD_RECEIVER = { passthrough = true }
+loader.env.CHAIN_ID = { passthrough = true }
+loader.env.VERIFYING_CONTRACT = { passthrough = true }
+loader.env.FUNCTION_CALL_IDS = { passthrough = true }
+loader.env.FUNCTION_PARAMS = { passthrough = true }
+
+fs.mounts = [
+  { uri = "file:{{ gramine.runtimedir() }}", path = "/lib" },
+  { uri = "file:{{ arch_libdir }}", path = "{{ arch_libdir }}" },
+  { uri = "file:/usr", path = "/usr" },
+  { uri = "file:/lib64", path = "/lib64" },
+  { uri = "file:/root/app/dist/index.js", path = "/root/app/dist/index.js" },
+  { uri = "file:/usr/lib/ssl/certs", path = "/usr/lib/ssl/certs" },
+  { uri = "file:/home/credentials", path = "/home/credentials" },
+  # Key options:
+  # _sgx_mrenclave, anyone with the same enclave signature can unseal
+  # _sgx_mrsigner, only the same physical machine AND running the same image can seal/unseal
+  { type = "encrypted", uri = "file:/data/protected_files", path = "/data/protected_files", key_name = "_sgx_mrenclave" },
+  { path = "/etc", uri = "file:/etc" },
+]
+
+loader.pal_internal_mem_size = "128M"
+
+sgx.enclave_size = "2G"
+sgx.nonpie_binary = true
+# FORCE ENABLE THIS FOR FASTER BOOT
+sgx.edmm_enable = {{ 'true' if env.get('EDMM', '0') == '1' else 'false' }}
+sgx.max_threads = 128
+sgx.remote_attestation = "dcap"
+
+# See https://gramine.readthedocs.io/en/latest/devel/performance.html#glibc-malloc-tuning
+loader.env.MALLOC_ARENA_MAX = "1"
+
+
+# The Tokio runtime requires eventfd, and the Gramine implementation
+# currently relies on the host in an insecure manner. This setting isn't
+# suitable for production deployment, but works well as a stopgap during
+# development while a proper implementation in Gramine is being worked on.
+sys.insecure__allow_eventfd = true
+#sys.stack.size = "2M"
+
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:{{ arch_libdir }}/",
+  "file:/usr{{ arch_libdir }}/",
+  "file:/lib64/",
+  "file:/usr/include/",
+  "file:/root/app/dist/index.js",
+  "file:/usr/bin/node",
+  "file:/usr/lib/ssl/certs/",
+  "file:/data/protected_files/",
+  "file:/etc/ssl/",
+]
+
+sgx.allowed_files = [
+  "file:/var/run/aesmd/aesm.socket",
+  "file:/home/credentials/gcp-sa.json",
+  "file:/etc/hosts",
+  "file:/etc/host.conf",
+  "file:/etc/gai.conf",
+  "file:/etc/resolv.conf",
+  "file:/etc/localtime",
+  "file:/etc/nsswitch.conf",
+  "file:uuid"
+]
+
+# sgx.file_check_policy = "allow_all_but_log"
+
+loader.argv = ["/usr/bin/node", "--unhandled-rejections=warn", "/root/app/dist/index.js"]
