@@ -7,6 +7,9 @@ inputs:
   upload-url:
     description: "The release upload URL"
     required: true
+  gh-token:
+    description: "The GH_Token secret"
+    required: true
 outputs:
   artifacts:
     description: "Array of artifacts that were generated"

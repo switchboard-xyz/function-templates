@@ -41,11 +41,9 @@ jobs:
 
       - name: Create Release Artifacts
         uses: "./.github/actions/build-release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-name: ${{ steps.create-release.outputs.id }}
           upload-url: ${{ steps.create-release.outputs.upload_url }}
-          templates: |
-            solana
-            solana-anchor
-            evm-rust
-            evm-typescript
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
