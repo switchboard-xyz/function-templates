@@ -1,0 +1,29 @@
+{
+  "name": "@switchboard-xyz/function-templates",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "templates",
+    "CHANGELOG.md",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build:release": "tsx ./scripts/build-release.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@actions/http-client": "^2.1.1",
+    "zip-a-folder": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  }
+}
