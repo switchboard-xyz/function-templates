@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/switchboard-xyz/function-templates/compare/v1.1.0...v1.2.0) (2023-08-14)
+
+
+### Features
+
+* updated solana-anchor template ([ff67d3a](https://github.com/switchboard-xyz/function-templates/commit/ff67d3afd4d94a9471daad213d6200746e783ff8))
+
 ## [1.1.0](https://github.com/switchboard-xyz/function-templates/compare/v1.0.0...v1.1.0) (2023-08-14)
 
 
