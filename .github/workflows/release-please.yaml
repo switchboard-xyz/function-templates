@@ -33,7 +33,7 @@ jobs:
             if [[ -d "${d}" ]]; then
                 dirname="${d%/}"
                 template_name=$(basename "${dirname}")
-                zip -r "${template_name}.zip" "${dirname}"
+                zip -r "${template_name}.zip" "${dirname}"/*
                 gh release upload ${{ steps.release.outputs.tag_name }} "${template_name}.zip"
             fi
           done
