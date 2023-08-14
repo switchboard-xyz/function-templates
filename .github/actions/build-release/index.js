@@ -29,10 +29,11 @@ async function run() {
     const inputDirectory = `./templates/${template}/`;
     const outputZipFile = path.join(workingDir, `./.artifacts/${template}.zip`);
 
-    const result = child_process.execSync(`zip -r ${outputZipFile} .`, {
+    const result = child_process.execSync(`zip -TFFr ${outputZipFile} .`, {
       cwd: inputDirectory,
       encoding: "utf-8",
     });
+    console.log(`Zip Result: ${result}`);
 
     const uploadAssetResponse = await octokit.rest.repos.uploadReleaseAsset({
       url: uploadUrl,
