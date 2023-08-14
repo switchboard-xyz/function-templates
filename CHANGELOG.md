@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/switchboard-xyz/function-templates/compare/v1.0.7...v1.0.8) (2023-08-14)
+
+
+### Bug Fixes
+
+* wip ([0c39a43](https://github.com/switchboard-xyz/function-templates/commit/0c39a431a8b9b16a270d29ce017f2b8ece7c647e))
+
 ## [1.0.7](https://github.com/switchboard-xyz/function-templates/compare/v1.0.6...v1.0.7) (2023-08-14)
 
 
