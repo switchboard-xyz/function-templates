@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/switchboard-xyz/function-templates/compare/v1.3.0...v1.4.0) (2023-08-14)
+
+
+### Features
+
+* updated evm-typescript dockerfile ([b8ce365](https://github.com/switchboard-xyz/function-templates/commit/b8ce36501d2c86f08e4fb5839850097590047392))
+
+
+### Bug Fixes
+
+* cleaned up evm-typescript template ([fa8ac24](https://github.com/switchboard-xyz/function-templates/commit/fa8ac24cfde0e29775162292c2b09f20e393898a))
+* evm-typescript template ([5a35747](https://github.com/switchboard-xyz/function-templates/commit/5a3574750b28a6370fbf157c6d77327883e54ac3))
+
 ## [1.3.0](https://github.com/switchboard-xyz/function-templates/compare/v1.2.0...v1.3.0) (2023-08-14)
 
 
