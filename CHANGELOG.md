@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/switchboard-xyz/function-templates/compare/v1.4.1...v1.4.2) (2023-08-16)
+
+
+### Bug Fixes
+
+* updated evm-rust template ([5b94b1a](https://github.com/switchboard-xyz/function-templates/commit/5b94b1a77f1286783ae29e42c2e353fc1231aad5))
+
 ## [1.4.1](https://github.com/switchboard-xyz/function-templates/compare/v1.4.0...v1.4.1) (2023-08-14)
 
 
