@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/switchboard-xyz/function-templates/compare/v1.5.0...v1.5.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* dont suppress npm install logs ([3651ed0](https://github.com/switchboard-xyz/function-templates/commit/3651ed0963fea1c2ce525b0156e0b9de3c5e00c9))
+
 ## [1.5.0](https://github.com/switchboard-xyz/function-templates/compare/v1.4.2...v1.5.0) (2023-08-16)
 
 
