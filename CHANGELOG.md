@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/switchboard-xyz/function-templates/compare/v1.4.2...v1.5.0) (2023-08-16)
+
+
+### Features
+
+* added setup scripts to all templates ([c5e5384](https://github.com/switchboard-xyz/function-templates/commit/c5e5384479e4720a91a12795ca153af26c3d461c))
+
 ## [1.4.2](https://github.com/switchboard-xyz/function-templates/compare/v1.4.1...v1.4.2) (2023-08-16)
 
 
