@@ -40,19 +40,14 @@ else
     git init
 fi
 
-#2, check if rust, anchor, and solana are installed
+#2, check if cargo, anchor, and solana are installed
 if [[ $(should_install "rustup") -eq "1" ]]; then
     echo -e "${Green}Installing Rust ...${Color_Off}"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh > /dev/null 2>&1
 fi
-if [[ $(should_install "solana") -eq "1" ]]; then
-    echo -e "${Green}Installing Solana ...${Color_Off}"
-    sh -c "$(curl -sSfL https://release.solana.com/stable/install)" > /dev/null 2>&1
-fi
-if [[ $(should_install "anchor") -eq "1" ]]; then
-    echo -e "${Green}Installing Anchor ...${Color_Off}"
-    cargo install --git https://github.com/project-serum/anchor avm --locked --force > /dev/null 2>&1
-    avm use latest > /dev/null 2>&1
+if [[ $(should_install "foundryup") -eq "1" ]]; then
+    echo -e "${Green}Installing Foundry ...${Color_Off}"
+    curl -L https://foundry.paradigm.xyz | bash
 fi
 
 #3, determine the NodeJS package manager and run install command to generate lockfile
@@ -60,12 +55,7 @@ if [[ -f "package.json" ]]; then
    npm install > /dev/null 2>&1;
 fi
 
-#4, run 'anchor keys sync' to update PID, then run anchor build
-if command -v anchor >/dev/null 2>&1; then
-    anchor keys sync > /dev/null 2>&1
-fi
-
-#5, echo some helpful commands for the user to get started
+#4, echo some helpful commands for the user to get started
 printf "\n%sGetting Started:%s\n" "${Green}" "${Color_Off}"
 printf " > start by editing the Makefile with your docker repository\n"
 printf " > then update the switchboard-function with your custom off-chain logic\n"

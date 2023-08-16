@@ -1,33 +1,20 @@
 {
-  "include": [
-    "src/**/*"
-  ],
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "src",
+    "target": "es2020",
     "module": "commonjs",
-    "target": "es2022",
-    "noEmit": true,
-    "moduleResolution": "node",
-    "inlineSources": true,
-    "declaration": true,
-    "declarationMap": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
     "strict": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": true,
-    "noImplicitReturns": true,
-    "allowJs": true,
-    "checkJs": false,
-    "sourceMap": true,
-    "inlineSourceMap": false
-  }
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": [
+    "./script",
+    "./test",
+    "./typechain-types",
+    "./tasks",
+    "./switchboard-function"
+  ],
+  "files": [
+    "./hardhat.config.ts"
+  ]
 }

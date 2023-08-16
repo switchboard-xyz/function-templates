@@ -25,32 +25,36 @@ async function main() {
   // get all the callId / params pairs (each callId has associated params)
   const paramsResults = runner.params(paramsSchema);
 
-  // list of blocked senders 
-  const blockedSenders = new Set(["0x0000000000000000000000000000000000000000"])
+  // list of blocked senders
+  const blockedSenders = new Set([
+    "0x0000000000000000000000000000000000000000",
+  ]);
 
   // map paramsResults to calls
-  const calls = await Promise.all(paramsResults.map(async (paramsResult) => {
-    const { callId, params } = paramsResult;
+  const calls = await Promise.all(
+    paramsResults.map(async (paramsResult) => {
+      const { callId, params } = paramsResult;
 
-    if (!params) {
-      return undefined;
-    }
+      if (!params) {
+        return undefined;
+      }
 
-    const orderId: BigNumber = params.orderId;
-    const sender: string = params.sender;
+      const orderId: BigNumber = params.orderId;
+      const sender: string = params.sender;
 
-    // check if sender is blocked
-    if (blockedSenders.has(sender)) {
-      return undefined;
-    }
+      // check if sender is blocked
+      if (blockedSenders.has(sender)) {
+        return undefined;
+      }
 
-    // get random uint256
-    const randomBytes = utils.randomBytes(32);
-    const bn = BigNumber.from(Array.from(randomBytes));
+      // get random uint256
+      const randomBytes = utils.randomBytes(32);
+      const bn = BigNumber.from(Array.from(randomBytes));
 
-    // get txn
-    return contract.populateTransaction.fillOrder(orderId, bn);
-  }));
+      // get txn
+      return contract.populateTransaction.fillOrder(orderId, bn);
+    })
+  );
 
   const contract = new Contract(
     "0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41",

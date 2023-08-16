@@ -41,17 +41,25 @@
 
 ## Prerequisites
 
-Before you can build and run the project, you'll need to have Node.js and npm installed on your system. You'll also need to have Docker installed on your system. Docker allows you to package and distribute applications as lightweight containers, making it easy to manage dependencies and ensure consistent behavior across different environments. Switchboard Functions are built and run within containers, so you'll need a docker daemon running to publish a new function.
+Before you can build and run the project, you'll need to have Node.js and npm
+installed on your system. You'll also need to have Docker installed on your
+system. Docker allows you to package and distribute applications as lightweight
+containers, making it easy to manage dependencies and ensure consistent behavior
+across different environments. Switchboard Functions are built and run within
+containers, so you'll need a docker daemon running to publish a new function.
 
 ### Node.js and Npm
 
-If you don't have Node.js and npm installed, you can download and install them from the official Node.js website: [https://nodejs.org/](https://nodejs.org/)
+If you don't have Node.js and npm installed, you can download and install them
+from the official Node.js website: [https://nodejs.org/](https://nodejs.org/)
 
 ### Installing Docker
 
-If you don't have Docker installed, you can follow these steps to get it up and running:
+If you don't have Docker installed, you can follow these steps to get it up and
+running:
 
-1. **Linux**: Depending on your Linux distribution, you might need to use different package managers. For Ubuntu, you can use `apt`:
+1. **Linux**: Depending on your Linux distribution, you might need to use
+   different package managers. For Ubuntu, you can use `apt`:
 
    ```bash
    sudo apt update
@@ -60,21 +68,30 @@ If you don't have Docker installed, you can follow these steps to get it up and 
 
    For other distributions, consult your package manager's documentation.
 
-2. **macOS**: You can install Docker Desktop for macOS by downloading the installer from the [Docker website](https://www.docker.com/products/docker-desktop) and following the installation instructions.
+2. **macOS**: You can install Docker Desktop for macOS by downloading the
+   installer from the
+   [Docker website](https://www.docker.com/products/docker-desktop) and
+   following the installation instructions.
 
-3. **Windows**: Similarly, you can install Docker Desktop for Windows from the [Docker website](https://www.docker.com/products/docker-desktop) and follow the provided instructions.
+3. **Windows**: Similarly, you can install Docker Desktop for Windows from the
+   [Docker website](https://www.docker.com/products/docker-desktop) and follow
+   the provided instructions.
 
 ### Docker Setup
 
-After installing Docker, make sure it's running by opening a terminal/command prompt and running:
+After installing Docker, make sure it's running by opening a terminal/command
+prompt and running:
 
 ```bash
 docker --version
 ```
 
-This should display the installed Docker version, confirming that Docker is installed and running properly.
+This should display the installed Docker version, confirming that Docker is
+installed and running properly.
 
-You'll need to login to docker. If you don't yet have an account, you'll need one to publish images to dockerhub. You can sign up at [https://hub.docker.com](https://hub.docker.com).
+You'll need to login to docker. If you don't yet have an account, you'll need
+one to publish images to dockerhub. You can sign up at
+[https://hub.docker.com](https://hub.docker.com).
 
 ```bash
 docker login --username <your-username> --password <your-password>
@@ -84,14 +101,18 @@ docker login --username <your-username> --password <your-password>
 
 ### Contract
 
-This SwitchboardReceiver contract is a minimal example of a contract producing randomness in a callback function at a scheduled interval.
+This SwitchboardReceiver contract is a minimal example of a contract producing
+randomness in a callback function at a scheduled interval.
 
-When you deploy this contract, it will await to be bound to a switchboard function calling into it.
+When you deploy this contract, it will await to be bound to a switchboard
+function calling into it.
 
 #### Picking a network and setting up your environment
 
-- navigate to the [Project README.md](../../README.md) and find the switchboard deployment address
-- set the `SWITCHBOARD_ADDRESS` env variable to target whichever address is appropriate for the network you're targetting
+- navigate to the [Project README.md](../../README.md) and find the switchboard
+  deployment address
+- set the `SWITCHBOARD_ADDRESS` env variable to target whichever address is
+  appropriate for the network you're targetting
 
 To first deploy the contract, run:
 
@@ -115,7 +136,8 @@ export SWITCHBOARD_RECEIVER_ADDRESS=<RECEIVER_ADDRESS>
 
 Export the address to your environment and navigate to `switchboard-function/`
 
-The bulk of the function logic can be found in [./switchboard-function/src/index.ts](switchboard-function/src/index.ts).
+The bulk of the function logic can be found in
+[./switchboard-function/src/index.ts](switchboard-function/src/index.ts).
 
 Build functions from the `switchboard-function/` directory with
 
@@ -125,7 +147,8 @@ make build
 
 ### Publishing and Initialization
 
-You'll also need to pick a container name that your switchboard function will use on dockerhub.
+You'll also need to pick a container name that your switchboard function will
+use on dockerhub.
 
 ```bash
 export CONTAINER_NAME=your_docker_username/switchboard-function
@@ -133,11 +156,13 @@ export CONTAINER_NAME=your_docker_username/switchboard-function
 
 Here, set the name of your container to deploy and run `make build`
 
-After this is published, you are free to make your function account to set the rate of run for the function.
+After this is published, you are free to make your function account to set the
+rate of run for the function.
 
 ### Initializing the function
 
-You'll need the queue id and switchboard contract address from the [Project README.md](../../README.md) for the network you're targetting.
+You'll need the queue id and switchboard contract address from the
+[Project README.md](../../README.md) for the network you're targetting.
 
 See `scripts/create_function.ts` to create and deploy the function:
 
@@ -169,7 +194,10 @@ npx hardhat run scripts/check_function.ts  --network arbitrumTestnet
 
 ## Writing Switchboard TS Functions
 
-In order to write a successfully running switchboard function, you'll need to import `@switchboard-xyz/evm.js` to use the libraries which communicate the function results (which includes transactions to run) to the Switchboard Verifiers that execute these metatransactions.
+In order to write a successfully running switchboard function, you'll need to
+import `@switchboard-xyz/evm.js` to use the libraries which communicate the
+function results (which includes transactions to run) to the Switchboard
+Verifiers that execute these metatransactions.
 
 ### Setup
 
@@ -179,7 +207,8 @@ To get started, you'll need to install the all the packages:
 npm install
 ```
 
-Checkout [package.json](./package.json) for more all the packages used in this project.
+Checkout [package.json](./package.json) for more all the packages used in this
+project.
 
 ### Minimal Switchboard Function
 
@@ -213,32 +242,36 @@ async function main() {
   // get all the callId / params pairs (each callId has associated params)
   const paramsResults = runner.params(paramsSchema);
 
-  // list of blocked senders 
-  const blockedSenders = new Set(["0x0000000000000000000000000000000000000000"])
+  // list of blocked senders
+  const blockedSenders = new Set([
+    "0x0000000000000000000000000000000000000000",
+  ]);
 
   // map paramsResults to calls
-  const calls = await Promise.all(paramsResults.map(async (paramsResult) => {
-    const { callId, params } = paramsResult;
+  const calls = await Promise.all(
+    paramsResults.map(async (paramsResult) => {
+      const { callId, params } = paramsResult;
 
-    if (!params) {
-      return undefined;
-    }
+      if (!params) {
+        return undefined;
+      }
 
-    const orderId: BigNumber = params.orderId;
-    const sender: string = params.sender;
+      const orderId: BigNumber = params.orderId;
+      const sender: string = params.sender;
 
-    // check if sender is blocked
-    if (blockedSenders.has(sender)) {
-      return undefined;
-    }
+      // check if sender is blocked
+      if (blockedSenders.has(sender)) {
+        return undefined;
+      }
 
-    // get random uint256
-    const randomBytes = utils.randomBytes(32);
-    const bn = BigNumber.from(Array.from(randomBytes));
+      // get random uint256
+      const randomBytes = utils.randomBytes(32);
+      const bn = BigNumber.from(Array.from(randomBytes));
 
-    // get txn
-    return contract.populateTransaction.fillOrder(orderId, bn);
-  }));
+      // get txn
+      return contract.populateTransaction.fillOrder(orderId, bn);
+    })
+  );
 
   const contract = new Contract(
     "0x4976fb03C32e5B8cfe2b6cCB31c09Ba78EBaBa41",
@@ -252,12 +285,12 @@ async function main() {
 
 // run switchboard function
 main();
-
 ```
 
 ### Testing your function
 
-We can't guarantee that the function will run on the blockchain, but we can test that it compiles and runs locally.
+We can't guarantee that the function will run on the blockchain, but we can test
+that it compiles and runs locally.
 
 Run the following to test your function:
 
@@ -278,17 +311,24 @@ FN_OUT: 7b2276657273696f6e223a312c2271756f7465223a5b5d2c22666e5f6b6579223a5b3134
 
 ### Deploying and Maintenance
 
-After you publish the function and create it on the blockchain, you must keep the function escrow account funded to cover gas fees. Revisions to the function can be made by deploying a new version and updating the function config on-chain.
+After you publish the function and create it on the blockchain, you must keep
+the function escrow account funded to cover gas fees. Revisions to the function
+can be made by deploying a new version and updating the function config
+on-chain.
 
 ## Writing Receiver Contracts
 
-While Switchboard Functions can call back into any number of on-chain functions, it's useful to limit access to some privileged functions to just _your_ Switchboard Function.
+While Switchboard Functions can call back into any number of on-chain functions,
+it's useful to limit access to some privileged functions to just _your_
+Switchboard Function.
 
-In order to do this you'll need to know the switchboard address you're using, and which functionId will be calling into the function in question.
+In order to do this you'll need to know the switchboard address you're using,
+and which functionId will be calling into the function in question.
 
 ### Receiver Example
 
 ISwitchboard.sol
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
