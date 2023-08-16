@@ -52,7 +52,7 @@ fi
 
 #3, determine the NodeJS package manager and run install command to generate lockfile
 if [[ -f "package.json" ]]; then
-   npm install > /dev/null 2>&1;
+   npm install
 fi
 
 #4, echo some helpful commands for the user to get started

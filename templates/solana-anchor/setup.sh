@@ -57,7 +57,7 @@ fi
 
 #3, determine the NodeJS package manager and run install command to generate lockfile
 if [[ -f "package.json" ]]; then
-   npm install > /dev/null 2>&1;
+   npm install
 fi
 
 #4, run 'anchor keys sync' to update PID, then run anchor build
