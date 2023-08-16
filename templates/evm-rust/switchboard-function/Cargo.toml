@@ -1,12 +1,12 @@
 [workspace]
 
 [package]
-name = "randomness-function"
+name = "evm-function"
 version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "randomness-function"
+name = "evm-function"
 path = "src/main.rs"
 
 [dependencies]
@@ -14,5 +14,5 @@ tokio = "^1"
 futures = "0.3"
 ethers = { version = "2.0.7", features = ["legacy"] }
 rand = "0.8.5"
-switchboard-evm = "0.3.9"
 serde_json = "1.0.64"
+switchboard-evm = "0.3.9"

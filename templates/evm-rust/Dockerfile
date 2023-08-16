@@ -1,19 +1,13 @@
 # syntax=docker/dockerfile:1.4
 FROM switchboardlabs/sgx-function AS builder
 
-ARG CARGO_NAME=switchboard-function-evm
+ARG CARGO_NAME=evm-function
 ENV CARGO_NAME=$CARGO_NAME
-ARG SWITCHBOARD_RECEIVER_ADDRESS
-ENV SWITCHBOARD_RECEIVER_ADDRESS=$SWITCHBOARD_RECEIVER_ADDRESS
 
-WORKDIR /home/root/switchboard-function/sgx-function
-COPY ./Cargo.toml  ./
-COPY ./build.rs  ./
-COPY ./src ./src
+WORKDIR /home/root/switchboard-function
+COPY switchboard-function/Cargo.toml ./Cargo.toml
+COPY switchboard-function/src ./src/
 
-RUN rustup update
-
-RUN rustup override set stable
 RUN --mount=type=cache,target=/usr/local/cargo/registry,id=${TARGETPLATFORM} \
     --mount=type=cache,target=target,id=${TARGETPLATFORM} \
     cargo build --release && \

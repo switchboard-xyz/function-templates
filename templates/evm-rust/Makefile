@@ -1,24 +1,44 @@
-# include `.env` file and export its env vars
-# (-include to ignore error if it does not exist)
 -include .env
 
-# dependencies
-update          :; forge update
+.PHONY: build clean publish test
 
-# install proper solc version
+# Variables
+CARGO_NAME=evm-function
+DOCKER_IMAGE_NAME=switchboardlabs/evm-function
+
+DOCKER_BUILD_COMMAND=DOCKER_BUILDKIT=1 docker buildx build --platform linux/amd64 --build-arg CARGO_NAME=${CARGO_NAME}
+
+# Default make task
+all: build
+
 solc            :; nix-env -f https://github.com/dapphub/dapptools/archive/master.tar.gz -iA solc-static-versions.solc_0_8_19
 
-# build & test
-build           :; forge build
-build-optimised :; forge build --optimize
-test-forge      :; forge test
-test-gasreport 	:; forge test --gas-report
-trace           :; forge test -vvv
-clean           :; forge clean
-snapshot        :; forge snapshot
+build_contract:
+	forge build --optimize
 
-# chmod scripts
-scripts         :; chmod +x ./scripts/*
+docker_build:
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --load ./
+docker_publish:
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile -t ${DOCKER_IMAGE_NAME} --push ./
 
-# fork mainnet with Hardhat
-mainnet-fork    :; npx hardhat node --fork ${ETH_MAINNET_RPC_URL}
+dev_docker_build:
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile.dev -t ${DOCKER_IMAGE_NAME} --load ../../../../../
+dev_docker_publish:
+	${DOCKER_BUILD_COMMAND} --pull -f Dockerfile.dev -t ${DOCKER_IMAGE_NAME} --push ../../../../../
+
+build: build_contract docker_build measurement
+
+dev: dev_docker_build measurement
+
+publish: docker_publish measurement
+
+measurement:
+	@docker run -d --platform=linux/amd64 -q --name=my-switchboard-function ${DOCKER_IMAGE_NAME}:latest > /dev/null
+	@docker cp my-switchboard-function:/measurement.txt measurement.txt
+	@docker stop my-switchboard-function > /dev/null
+	@docker rm my-switchboard-function > /dev/null
+	@echo MrEnclave: $(shell cat ./measurement.txt)
+
+# Task to clean up the compiled rust application
+clean:
+	cargo clean
